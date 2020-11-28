@@ -2,8 +2,7 @@
 
 using namespace std;
 
-Graph::Graph(const char *filename) : 
-	input_file(string(filename)), m(0), n(0), pstart(nullptr), edges(nullptr) { }
+Graph::Graph(const char *filename) : input_file(string(filename)), m(0), n(0), pstart(nullptr), edges(nullptr) {}
 
 Graph::~Graph()
 {
@@ -26,7 +25,7 @@ void Graph::k_edge_connected_component(ul K)
 		cout << "K must be at least 2!" << endl;
 		return;
 	}
-	read_graph_binary();
+	read_file();
 	auto start = chrono::high_resolution_clock::now();
 	ul *pend = new ul[n];
 	for (ul i = 0; i < n; i++)
@@ -114,6 +113,48 @@ void Graph::k_edge_connected_component(ul K)
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
 	cout << "\tTotal processing time excluding I/O: " << duration.count() << " (microseconds)" << endl;
+}
+
+void Graph::read_file()
+{
+	printf("Start reading graph, Require files \"b_degree.bin\" and \"b_adj.bin\"\n");
+	vector<ul> edge, degrees;
+	ul i = 0;
+	n = 0;
+	string line;
+	ifstream myfile(input_file);
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			cout << "New line" << endl;
+			n++;
+			cout << line << '\n';
+			char *tokens = strtok(&line[0], " ");
+			while (tokens != NULL)
+			{
+				edge.pb((ul)atoll(tokens));
+				tokens = strtok(NULL, " ");
+				i++;
+			}
+			degrees.pb(i);
+		}
+		myfile.close();
+	}
+	m = i;
+	edges = new ul[m];
+	for (i = 0; i < m; i++)
+	{
+		edges[i] = edge[i];
+	}
+	if (pstart != nullptr)
+		delete[] pstart;
+	pstart = new ul[n + 1];
+	pstart[0] = 0;
+	for (i = 0; i < n; i++)
+	{
+		pstart[i + 1] = degrees[i];
+	}
 }
 
 void Graph::k_core_prune(ul K, ul *Q, ul Q_n, int *computed, ul *degree, ul *pend)
@@ -357,7 +398,7 @@ void Graph::remove_inner_edges(ul K, ul c_n, ul new_cn, ul *component_start, ul 
 void Graph::print_components(ul K, ul c_n, ul *component_start, ul *ids)
 {
 	ofstream outfile;
-	outfile.open("output.txt", ios::out | ios::trunc );
+	outfile.open("output.txt", ios::out | ios::trunc);
 
 	for (ul i = 0; i < c_n; i++)
 	{
