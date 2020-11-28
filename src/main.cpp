@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
 		cout << "Usage: " << argv[0] << " [input-file] [k]\n";
 		return -1;
 	}
-	graph->k_edge_connected_component((ul)atoi(argv[3]));
+	graph->k_edge_connected_component((unsigned int)atoi(argv[2]));
 	cout << "--------------" << endl;
 	return 0;
 }

@@ -1,11 +1,9 @@
-// Linear List Heap
-
-#include "../utils/def.h"
+#include "defines.h"
 
 class LinearHeap
 {
 private:
-    ul n;         // number of vertices
+    ul n;
     ul head_size; // max size of head table
 
     ul max_key; // max key value

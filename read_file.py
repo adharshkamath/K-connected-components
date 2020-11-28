@@ -1,9 +1,19 @@
-ip = open('../Email-Enron.txt', 'r')
-op = open('op.txt', 'w')
+import sys
+
+if len(sys.argv) == 1:
+    print("Usage: python3 read_file.py [input filename] [optional output filename]")
+    exit(-1)
+
+ip = open(sys.argv[1], 'r')
+
+if len(sys.argv) > 2:
+    op = open(sys.argv[2], 'w')
+else:
+    op = open("adj.txt", 'w')
+
 curr = None
 arr = []
 for line in ip:
-    # print(line.strip().split())
     if line.startswith('#'):
         continue
     a, b = line.strip().split()
