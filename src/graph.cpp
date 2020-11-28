@@ -112,12 +112,12 @@ void Graph::k_edge_connected_component(ul K)
 
 	auto stop = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-	cout << "\tTotal processing time excluding I/O: " << duration.count() << " (microseconds)" << endl;
+	cout << "\tTotal time : " << duration.count() << " (microseconds)" << endl;
 }
 
 void Graph::read_file()
 {
-	printf("Start reading graph, Require files \"b_degree.bin\" and \"b_adj.bin\"\n");
+
 	vector<ul> edge, degrees;
 	ul i = 0;
 	n = 0;
