@@ -18,3 +18,4 @@ To run the executable
 ```bash
 ./a.out [input file] [Value of K]
 ```
+There are two input files in the src directory `input.txt` (This is the [Enron Email](https://snap.stanford.edu/data/email-Enron.html) dataset converted to adjacency list) and `small-input.txt` (This is the example graph from the [resaearch paper](http://weiemmazhang.me/sublinks/papers/4.2.2013SIGMOD.Efficiently%20computing%20k-edge%20connected%20components%20via%20graph%20decomposition.pdf))
