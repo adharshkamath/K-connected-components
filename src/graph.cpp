@@ -127,9 +127,7 @@ void Graph::read_file()
 	{
 		while (getline(myfile, line))
 		{
-			cout << "New line" << endl;
 			n++;
-			cout << line << '\n';
 			char *tokens = strtok(&line[0], " ");
 			while (tokens != NULL)
 			{
